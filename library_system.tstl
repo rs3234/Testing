@@ -1,0 +1,75 @@
+# Declare library_system module
+load library_system
+
+# Test inputs for Book class
+test_class Book:
+    constructor:
+        Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 1937)
+        Book("1984", "George Orwell", "Dystopian", 1949)
+        Book("Sapiens", "Yuval Noah Harari", "Non-Fiction", 2011)
+    methods:
+        str
+        age
+
+# Test inputs for Library class
+test_class Library:
+    constructor:
+        Library()
+    methods:
+        add_book(Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", 1937))
+        add_book(Book("1984", "George Orwell", "Dystopian", 1949))
+        add_user(User("user1", "John Doe", "john@example.com"))
+        find_book("The Hobbit")
+        find_book("Nonexistent Book")
+        find_user("user1")
+        find_user("nonexistent_user")
+        borrow_book("user1", "The Hobbit")
+        return_book("user1", "The Hobbit")
+        average_book_age
+        most_popular_genre
+        user_borrowed_books("user1")
+        remove_book("1984")
+        remove_user("user1")
+        all_books
+        all_users
+        count_books
+        count_users
+        filter_books_by_genre("Fantasy")
+        filter_books_by_author("J.R.R. Tolkien")
+        find_oldest_book
+        find_newest_book
+        sort_books_by_year
+
+# Test inputs for User class
+test_class User:
+    constructor:
+        User("user1", "John Doe", "john@example.com")
+        User("user2", "Jane Doe", "jane@example.com")
+    methods:
+        borrow_book(Book("1984", "George Orwell", "Dystopian", 1949))
+        return_book(Book("1984", "George Orwell", "Dystopian", 1949))
+        borrowed_books_titles
+
+# Test inputs for LibraryManagementSystem class
+test_class LibraryManagementSystem:
+    constructor:
+        LibraryManagementSystem()
+    methods:
+        add_book("The Catcher in the Rye", "J.D. Salinger", "Classic", 1951)
+        add_user("user1", "John Doe", "john@example.com")
+        borrow_book("user1", "The Catcher in the Rye")
+        return_book("user1", "The Catcher in the Rye")
+        average_book_age
+        most_popular_genre
+        user_borrowed_books("user1")
+        remove_book("The Catcher in the Rye")
+        remove_user("user1")
+        all_books
+        all_users
+        count_books
+        count_users
+        filter_books_by_genre("Classic")
+        filter_books_by_author("J.D. Salinger")
+        find_oldest_book
+        find_newest_book
+        sort_books_by_year
