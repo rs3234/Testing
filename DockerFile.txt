@@ -1,0 +1,33 @@
+# Use an official Python runtime as a base image
+FROM python:3.10-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy all project files into the container
+COPY . /app
+
+# Install Universal Mutator dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clone Universal Mutator repository
+RUN git clone https://github.com/agroce/universalmutator.git /universalmutator
+
+# Set Universal Mutator as executable
+WORKDIR /universalmutator
+RUN make
+
+# Install TSTL (for testing)
+RUN pip install tstl
+
+# Set the working directory back to the app folder
+WORKDIR /app
+
+# Copy library_system.py and mutation files (if applicable)
+COPY library_system.py .
+
+# Default command to mutate and test
+CMD ["bash", "-c", "python3 library_system.py && tstl --generate 100 --output testcases.py && python3 testcases.py"]
